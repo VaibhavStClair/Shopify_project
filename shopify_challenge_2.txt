@@ -1,0 +1,19 @@
+--Answer 1
+Select count( distinct Orders.OrderID) as Total_orders from Orders inner join Shippers ON Orders.ShipperID = Shippers.ShipperID where ShipperName = 'Speedy Express'
+Result:
+
+Total_orders
+54
+
+--Answer 2
+Select max(Count_of_order) as Maximum, lastname from (Select LastName, count (distinct Orders.OrderID) as Count_of_order FROM Orders inner join Employees ON Orders.EmployeeID = Employees.EmployeeID group by Employees.LastName order by  Count_of_order desc)
+Result:
+Maximum	LastName
+40	Peacock
+
+--Answer 3
+Select count(distinct productname) as count, productname, country
+from (((Orderdetails INNER JOIN Orders ON Orders.OrderID = Orderdetails.OrderID) INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID) INNER JOIN Products ON Orderdetails.ProductID = Products.ProductID) where customers.country = 'Germany'
+Result:
+count	ProductName	Country
+45	Boston Crab Meat Germany
